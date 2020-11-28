@@ -85,7 +85,7 @@ sub OnDisconnected {
     my $response = HTTP::Response->parse($self->{response});
     if ($response->is_success) {
         my $data = JSON->new->utf8->decode($response->decoded_content);
-        $self->{network}->PutIRC("PRIVMSG $self->{chan} :City: $data->{name} · Country: $data->{sys}{country} · Weather: $data->{weather}[0]{main}/$data->{weather}[0]{description} · Temperature: $data->{main}{temp}℃ · Pressure: $data->{main}{pressure}hPa· Humidity: $data->{main}{humidity}%· Wind speed: $data->{wind}{speed}m/s· Wind degree: $data->{wind}{deg}degrees");
+        $self->{network}->PutIRC("PRIVMSG $self->{chan} :City: $data->{name} · Country: $data->{sys}{country} · Weather: $data->{weather}[0]{main}/$data->{weather}[0]{description} · Temperature: $data->{main}{temp}℃ · Pressure: $data->{main}{pressure}hPa · Humidity: $data->{main}{humidity}% · Wind speed: $data->{wind}{speed}m/s · Wind degree: $data->{wind}{deg}degrees");
     } else {
         my $error = $response->status_line;
         $self->{network}->PutIRC("PRIVMSG $self->{chan} :openweathermap/$self->{param} - $error");
